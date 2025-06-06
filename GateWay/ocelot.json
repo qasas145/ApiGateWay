@@ -1,0 +1,95 @@
+{
+    "Routes": [
+        {
+            "DownstreamPathTemplate": "/api/student",
+            "DownstreamScheme": "http",
+            "DownstreamHostAndPorts": [
+                {
+                    "Host": "localhost",
+                    "Port": 5272
+                }
+            ],
+            "UpstreamPathTemplate": "/student",
+            "UpstreamHttpMethod": [ "GET", "POST" ],
+            "RateLimitOptions": {
+                "Limit": 2,
+                "Period": "10s",
+                "EnableRateLimiting": true,
+                "PeriodTimespan": 10
+            },
+            "FileCacheOptions": {
+                "TtlSeconds": 10
+            },
+
+            "AuthenticationOptions": {
+                "AuthenticationProviderKey": "Bearer",
+                "AllowedScopes": []
+            }
+        },
+        {
+            "DownstreamPathTemplate": "/api/authorization",
+            "DownstreamScheme": "http",
+            "UpstreamPathTemplate": "/authorization",
+            "UpstreamHttpMethod": [ "POST"],
+            "RateLimitOptions": {
+                "Limit": 1,
+                "Period": "20s",
+                "EnableRateLimiting": true,
+                "PeriodTimespan": 10
+            },
+            "DownstreamHostAndPorts": [
+                {
+                    "Host": "localhost",
+                    "Port": 5074
+                }
+            ]
+        },
+        //{
+        //    "DownstreamPathTemplate": "/api/student/MuhammadElsayed",
+        //    "DownstreamScheme": "http",
+        //    "DownstreamHostAndPorts": [
+        //        {
+        //            "Host": "localhost",
+        //            "Port": 5272
+        //        }
+        //    ],
+        //    "UpstreamPathTemplate": "/student/MuhammadElsayed",
+        //    "UpstreamHttpMethod": [ "POST" ],
+        //    "RateLimitOptions": {
+        //        "EnableRateLimiting": true,
+        //        "Period": "10s",
+        //        "Limit": 2,
+        //        "PeriodTimespan": 10
+        //    },
+        //    "FileCacheOptions": {
+        //        "TtlSeconds": 10
+        //    },
+
+        //    "AuthenticationOptions": {
+        //        "AuthenticationProviderKey": "Bearer",
+        //        "AllowedScopes": []
+        //    }
+
+        //},
+        {
+            "DownstreamPathTemplate": "/api/payment",
+            "DownstreamScheme": "http",
+            "DownstreamHostAndPorts": [
+                {
+                    "Host": "localhost",
+                    "Port": 5202
+                }
+            ],
+            "UpstreamPathTemplate": "/payment",
+            "UpstreamHttpMethod": [ "GET" ]
+        }
+    ],
+    "GlobalConfiguration": {
+        "BaseUrl": "https://localhost:7198",
+        "RateLimitOptions": {
+            "DisableRateLimitHeaders": false,
+            "QuotaExceededMessage": "You have reached the limit Muhammad Elsayed osman Elqasas",
+            "HttpStatusCode" :  429
+        }
+    }
+}
