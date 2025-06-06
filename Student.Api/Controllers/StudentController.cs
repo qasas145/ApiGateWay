@@ -12,12 +12,24 @@ namespace Student.Api.Controllers
         {
             _logger = logger;
         }
-        [HttpGet]
-        [Authorize]
+        [HttpGet("get")]
         public IActionResult Get() {
             _logger.LogInformation("Hello get from the get method");
             return Ok("Hello from the student controller");
-         }
+        }
+        [HttpGet("getdata")]
+        public IActionResult GetData()
+        {
+            _logger.LogInformation("My information");
+            return Ok("Data of Muhammad Elsayed");
+        }
+        [HttpPost("create")]
+        [Authorize]
+        public IActionResult InsertData(string data)
+        {
+            _logger.LogInformation("data sent is {0}", data);
+            return Ok(data);
+        }
 
     }
 }

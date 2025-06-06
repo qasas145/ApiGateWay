@@ -1,7 +1,8 @@
 {
     "Routes": [
+        // this for the get (we don't want auth )
         {
-            "DownstreamPathTemplate": "/api/student",
+            "DownstreamPathTemplate": "/api/student/{everything}",
             "DownstreamScheme": "http",
             "DownstreamHostAndPorts": [
                 {
@@ -9,18 +10,30 @@
                     "Port": 5272
                 }
             ],
-            "UpstreamPathTemplate": "/student",
-            "UpstreamHttpMethod": [ "GET", "POST" ],
+            "UpstreamPathTemplate": "/student/{everything}",
+            "UpstreamHttpMethod": [ "GET" ],
+            "FileCacheOptions": {
+                "TtlSeconds": 10
+            }
+        },
+        // but for the post we want 
+        {
+            "DownstreamPathTemplate": "/api/student/{everything}",
+            "DownstreamScheme": "http",
+            "DownstreamHostAndPorts": [
+                {
+                    "Host": "localhost",
+                    "Port": 5272
+                }
+            ],
+            "UpstreamPathTemplate": "/student/{everything}",
+            "UpstreamHttpMethod": [ "POST" ],
             "RateLimitOptions": {
                 "Limit": 2,
                 "Period": "10s",
                 "EnableRateLimiting": true,
                 "PeriodTimespan": 10
             },
-            "FileCacheOptions": {
-                "TtlSeconds": 10
-            },
-
             "AuthenticationOptions": {
                 "AuthenticationProviderKey": "Bearer",
                 "AllowedScopes": []
@@ -30,7 +43,7 @@
             "DownstreamPathTemplate": "/api/authorization",
             "DownstreamScheme": "http",
             "UpstreamPathTemplate": "/authorization",
-            "UpstreamHttpMethod": [ "POST"],
+            "UpstreamHttpMethod": [ "POST" ],
             "RateLimitOptions": {
                 "Limit": 1,
                 "Period": "20s",
@@ -44,33 +57,6 @@
                 }
             ]
         },
-        //{
-        //    "DownstreamPathTemplate": "/api/student/MuhammadElsayed",
-        //    "DownstreamScheme": "http",
-        //    "DownstreamHostAndPorts": [
-        //        {
-        //            "Host": "localhost",
-        //            "Port": 5272
-        //        }
-        //    ],
-        //    "UpstreamPathTemplate": "/student/MuhammadElsayed",
-        //    "UpstreamHttpMethod": [ "POST" ],
-        //    "RateLimitOptions": {
-        //        "EnableRateLimiting": true,
-        //        "Period": "10s",
-        //        "Limit": 2,
-        //        "PeriodTimespan": 10
-        //    },
-        //    "FileCacheOptions": {
-        //        "TtlSeconds": 10
-        //    },
-
-        //    "AuthenticationOptions": {
-        //        "AuthenticationProviderKey": "Bearer",
-        //        "AllowedScopes": []
-        //    }
-
-        //},
         {
             "DownstreamPathTemplate": "/api/payment",
             "DownstreamScheme": "http",
