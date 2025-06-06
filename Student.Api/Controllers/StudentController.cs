@@ -8,28 +8,17 @@ namespace Student.Api.Controllers
     public class StudentController : ControllerBase
     {
         private readonly ILogger<StudentController> _logger;
-        public StudentController(ILogger<StudentController> logger)
-        {
-            _logger = logger;
-        }
-        [HttpGet("get")]
-        public IActionResult Get() {
-            _logger.LogInformation("Hello get from the get method");
-            return Ok("Hello from the student controller");
-        }
+        public StudentController(ILogger<StudentController> logger) => _logger = logger;
+
         [HttpGet("getdata")]
-        public IActionResult GetData()
-        {
-            _logger.LogInformation("My information");
-            return Ok("Data of Muhammad Elsayed");
-        }
+        public IActionResult GetData() => Ok("Name : 'Muhammad'");
+
         [HttpPost("create")]
         [Authorize]
-        public IActionResult InsertData(string data)
-        {
-            _logger.LogInformation("data sent is {0}", data);
-            return Ok(data);
-        }
+        public IActionResult InsertData(string data) => Ok(data);
 
+
+        [HttpPost("createdata")]
+        public IActionResult InsertDataWithoutAuth(string data) => Ok(data);
     }
 }

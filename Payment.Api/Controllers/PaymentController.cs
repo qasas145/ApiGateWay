@@ -8,11 +8,6 @@ namespace Payment.Api.Controllers
     public class PaymentController : ControllerBase
     {
         [HttpGet]
-        public IActionResult Get() {
-            Console.ForegroundColor = ConsoleColor.Green;
-            Console.WriteLine("Hello Muhammad Elsayed Elqasas");
-            Console.ForegroundColor = ConsoleColor.White;
-            return Ok("Hello From the payment project");
-        }
+        public IActionResult Get() => Ok("Hello from the payment controller");
     }
 }

@@ -16,6 +16,25 @@
                 "TtlSeconds": 10
             }
         },
+        {
+            "DownstreamPathTemplate": "/api/student/createdata",
+            "DownstreamScheme": "http",
+            "DownstreamHostAndPorts": [
+                {
+                    "Host": "localhost",
+                    "Port": 5272
+                }
+            ],
+            "UpstreamHttpMethod": [ "POST" ],
+            "UpstreamPathTemplate": "/student/createdata",
+            "RateLimitOptions": {
+                "Limit": 2,
+                "Period": "10s",
+                "EnableRateLimiting": true,
+                "PeriodTimespan": 10
+            }
+
+        },
         // but for the post we want 
         {
             "DownstreamPathTemplate": "/api/student/{everything}",
